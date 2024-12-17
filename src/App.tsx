@@ -60,7 +60,7 @@ function DemoPageContent({ pathname }: { pathname: string }) {
 //   );
 // }
 export default function DashboardLayoutBranding() {
-  router = useDemoRouter('dashboard');
+  const router = useDemoRouter('/dashboard');
   return (
     // preview-start
     <AppProvider
