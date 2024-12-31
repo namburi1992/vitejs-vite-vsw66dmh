@@ -90,7 +90,7 @@ const CameraTable = ({ data, sortField, sortOrder, onSort, onDialogOpen }) => {
               </TableCell>
               <TableCell>
                 <Button size="small" onClick={handleOpen} startIcon={<LockResetIcon />}>
-                
+
                 </Button>
 
                 {/* after decrytpion this button will be disabled */}
@@ -103,7 +103,7 @@ const CameraTable = ({ data, sortField, sortOrder, onSort, onDialogOpen }) => {
         </TableBody>
       </Table>
     </TableContainer>
-    <div>
+      <div>
         <Button onClick={handleOpen}>Open modal</Button>
         <Modal
           open={open}
@@ -112,12 +112,13 @@ const CameraTable = ({ data, sortField, sortOrder, onSort, onDialogOpen }) => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            
+
           </Box>
         </Modal>
-      </div></>
+      </div>
+    </>
 
-    
+
 
 
 

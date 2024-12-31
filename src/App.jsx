@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { createTheme } from '@mui/material/styles';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import InfoIcon from '@mui/icons-material/Info';
 import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { useDemoRouter } from '@toolpad/core/internal';
@@ -13,7 +13,7 @@ import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
-import HomePage from './pages/home';
+import HomePage from './pages/Home';
 
 const NAVIGATION = [
   {
@@ -22,9 +22,9 @@ const NAVIGATION = [
     icon: <DashboardIcon />,
   },
   {
-    segment: 'orders',
-    title: 'Orders',
-    icon: <ShoppingCartIcon />,
+    segment: 'about',
+    title: 'About us',
+    icon: <InfoIcon />,
   },
 ];
 
@@ -44,26 +44,44 @@ const theme = createTheme({
   },
 });
 
-function DemoPageContent(pathname) {
-  return <HomePage />;
-}
+const BRANDING = {
+  logo: <img src="https://mui.com/static/logo.png" alt="MUI logo" />,
+  title: 'Orchid Dashboard',
+};
 
 export default function DashboardLayoutBranding() {
-  const router = useDemoRouter('dashboard');
+  const [session, setSession] = React.useState({
+    user: {
+      name: 'Bharat Kashyap',
+      email: 'bharatkashyap@outlook.com',
+      image: 'https://avatars.githubusercontent.com/u/19550456',
+    },
+  });
+
+  const authentication = React.useMemo(() => {
+    return {
+      signIn: () => {
+        setSession({
+          user: {
+            name: 'Bharat Kashyap',
+            email: 'bharatkashyap@outlook.com',
+            image: 'https://avatars.githubusercontent.com/u/19550456',
+          },
+        });
+      },
+      signOut: () => {
+        setSession(null);
+      },
+    };
+  }, []);
   return (
-    // preview-start
-    <AppProvider
-      navigation={NAVIGATION}
-      branding={{
-        logo: <img src="https://mui.com/static/logo.png" alt="MUI logo" />,
-        title: 'Orchid Dashboard',
-        homeUrl: '/toolpad/core/introduction',
-      }}
-      router={router}
-      theme={theme}
-    >
+    <AppProvider 
+    session={session}
+    authentication={authentication}
+    navigation={NAVIGATION}
+    branding={BRANDING}
+    theme={theme}>
       <Outlet />
     </AppProvider>
-    // preview-end
   );
 }

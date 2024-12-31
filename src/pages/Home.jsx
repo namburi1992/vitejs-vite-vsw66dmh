@@ -8,7 +8,7 @@ import mockData from '../mockData';
 const HomePage = () => {
   const [division, setDivision] = useState('');
   const [store, setStore] = useState('');
-  const [sortOrder, setSortOrder] = useState('as');
+  const [sortOrder, setSortOrder] = useState('asc');
   const [sortField, setSortField] = useState('ip');
   const [page, setPage] = useState(1);
   const [dialogImage, setDialogImage] = useState(null);
