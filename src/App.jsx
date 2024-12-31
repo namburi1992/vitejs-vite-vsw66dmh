@@ -4,13 +4,18 @@ import Typography from '@mui/material/Typography';
 import { createTheme } from '@mui/material/styles';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { AppProvider, type Navigation } from '@toolpad/core/AppProvider';
+import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { useDemoRouter } from '@toolpad/core/internal';
-import Home from './pages/Home';
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
+import { Outlet } from 'react-router-dom';
 import LinearProgress from '@mui/material/LinearProgress';
-const NAVIGATION: Navigation = [
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
+import HomePage from './pages/home';
+
+const NAVIGATION = [
   {
     segment: 'dashboard',
     title: 'Dashboard',
@@ -39,28 +44,12 @@ const theme = createTheme({
   },
 });
 
-function DemoPageContent({ pathname }: { pathname: string }) {
-  return <Home />;
+function DemoPageContent(pathname) {
+  return <HomePage />;
 }
-// export default function RootLayout({
-//   children,
-// }: Readonly<{ children: React.ReactNode }>) {
-//   return (
-//     <html lang="en" data-toolpad-color-scheme="light">
-//       <body>
-//         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-//           <React.Suspense fallback={<LinearProgress />}>
-//             <AppProvider theme={theme} navigation={NAVIGATION}>
-//               {children}
-//             </AppProvider>
-//           </React.Suspense>
-//         </AppRouterCacheProvider>
-//       </body>
-//     </html>
-//   );
-// }
+
 export default function DashboardLayoutBranding() {
-  const router = useDemoRouter('/dashboard');
+  const router = useDemoRouter('dashboard');
   return (
     // preview-start
     <AppProvider
@@ -73,9 +62,7 @@ export default function DashboardLayoutBranding() {
       router={router}
       theme={theme}
     >
-      <DashboardLayout>
-        <DemoPageContent pathname={router.pathname} />
-      </DashboardLayout>
+      <Outlet />
     </AppProvider>
     // preview-end
   );
